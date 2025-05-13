@@ -10,6 +10,9 @@ export class Admin {
 
   @Prop()
   email: string;
+
+  @Prop({ default: Date.now })
+  createdAt: Date;
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);

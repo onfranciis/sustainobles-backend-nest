@@ -10,6 +10,8 @@ import {
 import { EmailParamGuard } from 'src/guard/mail.guard';
 import { AdminService } from './admin.service';
 import { AddAdminDto } from './dto/add-admin.dto';
+import { GetAdminData } from 'src/decorator/get-admin-data.decorator';
+import { Admin } from 'src/schema/admin.schema';
 
 @Controller('admin')
 export class AdminController {
@@ -22,8 +24,8 @@ export class AdminController {
 
   @Get(':email')
   @UseGuards(EmailParamGuard)
-  getAllAdmin() {
-    return this.adminService.getAllAdmin();
+  getAllAdmin(@GetAdminData() adminData: Admin) {
+    return this.adminService.getAllAdmin(adminData);
   }
 
   @Delete(':email')
