@@ -31,7 +31,6 @@ export class AdminService {
     email,
     name,
   }: Admin): Promise<AdminDocument[] | null | string> {
-    console.log(email, name);
     const query = await this.adminModel.find().lean();
     const csv = await CSVParser(query, {
       _id: 'ID',
