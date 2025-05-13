@@ -16,6 +16,9 @@ export class Volunteer {
 
   @Prop()
   email: string;
+
+  @Prop({ default: Date.now })
+  createdAt: Date;
 }
 
 export const VolunteerSchema = SchemaFactory.createForClass(Volunteer);

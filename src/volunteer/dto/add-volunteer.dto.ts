@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsString, Matches } from 'class-validator';
+import { EMAIL_REGEX } from 'src/util/const.util';
 
 export class AddVolunteerDto {
   @IsString()
@@ -19,7 +20,7 @@ export class AddVolunteerDto {
   phoneNumber: number;
 
   @Transform(({ value }: { value: string }) => value.replace(/[\s-]/g, ''))
-  @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+  @Matches(EMAIL_REGEX, {
     message: 'Email must be a valid address',
   })
   email: string;
