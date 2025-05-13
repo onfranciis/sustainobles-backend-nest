@@ -13,6 +13,9 @@ export class Donation {
 
   @Prop()
   description: string;
+
+  @Prop({ default: Date.now })
+  createdAt: Date;
 }
 
 export const DonationSchema = SchemaFactory.createForClass(Donation);

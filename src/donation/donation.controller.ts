@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AddDonationDto } from './dto/add-donation.dto';
 import { DonationService } from './donation.service';
+import { EmailParamGuard } from 'src/guard/mail.guard';
+import { GetAdminData } from 'src/decorator/get-admin-data.decorator';
+import { Admin } from 'src/schema/admin.schema';
 
 @Controller('donation')
 export class DonationController {
@@ -11,8 +14,9 @@ export class DonationController {
     return this.donationService.create(AddDonationDto);
   }
 
-  @Get()
-  get() {
-    return this.donationService.get();
+  @Get(':email')
+  @UseGuards(EmailParamGuard)
+  getAllAdmin(@GetAdminData() adminData: Admin) {
+    return this.donationService.getAllDonation(adminData);
   }
 }
